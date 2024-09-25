@@ -23,4 +23,7 @@ public class Accounts extends  BaseEntity {
 
 
     private String mobileNumber;
+
+    private String accountType;
+    private String branchAddress;
 }
