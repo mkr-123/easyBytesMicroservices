@@ -72,6 +72,8 @@ public class AccountsServiceImpl implements IAccountsService {
         return  isUpdated;
     }
 
+
+
     /**
      * @param customer - Customer Object
      * @return the new account details
@@ -87,5 +89,14 @@ public class AccountsServiceImpl implements IAccountsService {
         newAccount.setCreatedAt(LocalDateTime.now());
         newAccount.setCreatedBy("Anamyous");
         return newAccount;
+    }
+    @Override
+    public boolean deleteAccount(String mobileNumber) {
+        Customer customer = customerRepoistory.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResrouceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        accountsRepoistory.deleteByCustomerId(customer.getCustomerId());
+        customerRepoistory.deleteById(customer.getCustomerId());
+        return true;
     }
 }
