@@ -4,6 +4,10 @@ import com.eazybytes.accounts.DTO.CustomerDto;
 import com.eazybytes.accounts.DTO.ResponseDto;
 import com.eazybytes.accounts.constants.AccountsConstants;
 import com.eazybytes.accounts.service.IAccountsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Pattern;
@@ -18,8 +22,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api",produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
 @Validated
+@Tag(name="CRUD Rest API for Accounts",description = "Update,Create,Fetch,Delete API's are created for Accounts")
 public class AccountController {
     private IAccountsService iAccountsService;
+    @Operation(
+            summary = "Create Account REST API",
+            description = "REST API for creating account"
+    )
+    @ApiResponse(responseCode = "201",description = "Account created successfully")
 @PostMapping("/create")
     public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDTO) {
     iAccountsService.createAccount(customerDTO);
@@ -27,6 +37,12 @@ public class AccountController {
                 body(new ResponseDto(AccountsConstants.STATUS_201, AccountsConstants.MESSAGE_201));
     }
 
+    @Operation(
+            summary = "Update Account REST API",
+            description = "REST API for updating account"
+    )
+    @ApiResponse(responseCode = "201",description = "Account updated successfully")
+    @ApiResponse(responseCode = "500",description = "Http-status Internal server error")
     @PutMapping("/update")
     public ResponseEntity<ResponseDto> updateAccountDetails(@Valid @RequestBody CustomerDto customerDto) {
         boolean isUpdated = iAccountsService.updateAccount(customerDto);
@@ -37,12 +53,15 @@ public class AccountController {
         }else{
             return ResponseEntity
                     .status(HttpStatus.EXPECTATION_FAILED)
-                    .body(new ResponseDto(AccountsConstants.STATUS_417, AccountsConstants.MESSAGE_417_UPDATE));
+                    .body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
         }
     }
-
-
-    @GetMapping("/fetch")
+    @Operation(
+            summary = "Fetch Account REST API",
+            description = "REST API for fetching account"
+    )
+    @ApiResponse(responseCode = "201",description = "Account fetched successfully")
+      @GetMapping("/fetch")
     public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam  @Digits(fraction = 0, integer = 10,
             message = "Please provide a valid mobile number") String mobileNumber) {
 
@@ -50,6 +69,15 @@ public class AccountController {
 
         return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
+
+    @Operation(
+            summary = "Delete Account REST API",
+            description = "REST API for deleting account"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "201",description = "Account deleted successfully"),
+            @ApiResponse(responseCode = "500",description = "Http-status Internal server error")
+    })
 
     @DeleteMapping("/delete")
     public ResponseEntity<ResponseDto> deleteAccountDetails(@RequestParam
@@ -63,7 +91,7 @@ public class AccountController {
         }else{
             return ResponseEntity
                     .status(HttpStatus.EXPECTATION_FAILED)
-                    .body(new ResponseDto(AccountsConstants.STATUS_417, AccountsConstants.MESSAGE_417_DELETE));
+                    .body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
         }
     }
 
