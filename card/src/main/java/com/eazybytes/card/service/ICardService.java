@@ -1,2 +1,7 @@
-package com.eazybytes.card.service;public interface ICardService {
+package com.eazybytes.card.service;
+
+import com.eazybytes.card.DTO.CardDto;
+
+public interface ICardService {
+    void createCard(CardDto cardDto);
 }

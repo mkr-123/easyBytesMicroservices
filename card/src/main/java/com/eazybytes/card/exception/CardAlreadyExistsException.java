@@ -1,12 +1,12 @@
-package com.eazybytes.accounts.exception;
+package com.eazybytes.card.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class CustomerAlreadyExistsException extends RuntimeException{
+public class CardAlreadyExistsException extends RuntimeException{
 
-    public CustomerAlreadyExistsException(String message) {
+    public CardAlreadyExistsException(String message) {
         super(message);
     }
 }

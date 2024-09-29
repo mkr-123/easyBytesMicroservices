@@ -1,6 +1,6 @@
-package com.eazybytes.accounts.exception;
+package com.eazybytes.card.exception;
 
-import com.eazybytes.accounts.DTO.ErrorResponseDto;
+import com.eazybytes.card.DTO.ErrorResponseDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -45,8 +45,8 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         );
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    @ExceptionHandler(CustomerAlreadyExistsException.class)
-    public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CustomerAlreadyExistsException exception,
+    @ExceptionHandler(CardAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponseDto> handleCustomerAlreadyExistsException(CardAlreadyExistsException exception,
                                                                                  WebRequest webRequest){
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(
                 webRequest.getDescription(false),
@@ -57,9 +57,9 @@ public class GlobalException extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(ResrouceNotFoundException.class)
-    public ResponseEntity<ErrorResponseDto> handleResorceNotFoundException(ResrouceNotFoundException exception,
-                                                                                 WebRequest webRequest){
+    @ExceptionHandler(CardNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> handleResorceNotFoundException(CardNotFoundException exception,
+                                                                           WebRequest webRequest){
         ErrorResponseDto errorResponseDTO = new ErrorResponseDto(
                 webRequest.getDescription(false),
                 HttpStatus.NOT_FOUND,

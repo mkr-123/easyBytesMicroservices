@@ -1,4 +1,4 @@
-package com.eazybytes.accounts.DTO;
+package com.eazybytes.card.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
