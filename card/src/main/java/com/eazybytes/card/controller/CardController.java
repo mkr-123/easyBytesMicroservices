@@ -4,15 +4,13 @@ import com.eazybytes.card.DTO.CardDto;
 import com.eazybytes.card.DTO.ResponseDto;
 import com.eazybytes.card.service.ICardService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -25,5 +23,14 @@ public class CardController {
         cardService.createCard(cardDto);
         return  ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDto("200", "Card created successfully"));
 
+    }
+
+
+    @GetMapping("/fetch")
+    public ResponseEntity<CardDto> fetchCardDetails(@RequestParam
+                                                     @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                     String mobileNumber) {
+        CardDto cardsDto = cardService.fetchCard(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
     }
 }
