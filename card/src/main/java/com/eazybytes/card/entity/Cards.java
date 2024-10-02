@@ -37,9 +37,5 @@ public class Cards extends BaseEntity {
 
     private int availableAmount;
 
-    private LocalDateTime createdAt;
 
-    private String createdBy;
-    private LocalDateTime lastUpdatedAt;
-    private String lastUpdatedBy;
 }
