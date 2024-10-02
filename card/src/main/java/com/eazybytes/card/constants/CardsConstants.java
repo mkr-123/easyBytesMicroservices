@@ -1,8 +1,8 @@
 package com.eazybytes.card.constants;
 
-public final class CardssConstants {
+public final class CardsConstants {
 
-    private CardssConstants() {
+    private CardsConstants() {
         // restrict instantiation
     }
 
@@ -18,4 +18,6 @@ public final class CardssConstants {
      public static final String  STATUS_500 = "500";
      public static final String  MESSAGE_500 = "An error occurred. Please try again or contact Dev team";
 
+    public static final String  CREDIT_CARD = "Credit Card";
+    public static final int  NEW_CARD_LIMIT = 1_00_000;
 }

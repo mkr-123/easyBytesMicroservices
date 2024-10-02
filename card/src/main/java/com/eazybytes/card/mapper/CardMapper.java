@@ -5,8 +5,8 @@ import com.eazybytes.card.entity.Cards;
 
 public class CardMapper {
 
-    public static CardDto mapToCardDto(Cards card) {
-        CardDto cardDto = new CardDto();
+    public static CardDto mapToCardDto(Cards card,CardDto cardDto) {
+
         cardDto.setCardType(card.getCardType());
         cardDto.setCardNumber(card.getCardNumber());
         cardDto.setTotalLimit(card.getTotalLimit());
@@ -17,8 +17,8 @@ public class CardMapper {
         return cardDto;
     }
 
-    public static Cards mapToCard(CardDto cardDto) {
-        Cards card = new Cards();
+    public static Cards mapToCard(CardDto cardDto,Cards card) {
+
         card.setCardType(cardDto.getCardType());
         card.setCardNumber(cardDto.getCardNumber());
         card.setTotalLimit(cardDto.getTotalLimit());
