@@ -9,7 +9,7 @@ services:
         limits:
           memory: 700m
     networks:
-      -easybank
+      - easybank
   loans:
     image: "yukkthi99/loans:s4"
     container_name: loans-ms
@@ -20,7 +20,7 @@ services:
         limits:
           memory: 700m
     networks:
-      -easybank
+      - easybank
   card:
     image: "yukkthi99/card:s4"
     container_name: card-ms
@@ -31,7 +31,8 @@ services:
         limits:
           memory: 700m
     networks:
-      -easybank
+      - easybank
+
 networks:
   easybank:
-    driver:"bridge"
+    driver: "bridge"
