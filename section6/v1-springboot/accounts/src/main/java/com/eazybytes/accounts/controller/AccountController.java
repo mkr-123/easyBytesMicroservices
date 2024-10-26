@@ -1,5 +1,6 @@
 package com.eazybytes.accounts.controller;
 
+import com.eazybytes.accounts.DTO.AccountsInfoDTO;
 import com.eazybytes.accounts.DTO.CustomerDto;
 import com.eazybytes.accounts.DTO.ResponseDto;
 import com.eazybytes.accounts.constants.AccountsConstants;
@@ -38,6 +39,10 @@ public class AccountController {
 
     @Autowired
     private Environment environment;
+
+
+    @Autowired
+    private AccountsInfoDTO accountsInfoDTO;
     @Operation(
             summary = "Create Account REST API",
             description = "REST API for creating account"
@@ -129,5 +134,18 @@ public class AccountController {
                 environment.getProperty("JAVA_HOME")
         );
     }
+
+    @Operation(
+            summary = "Fetch Account REST API",
+            description = "REST API for fetching properties value using configurationg"
+    )
+    @ApiResponse(responseCode = "201",description = "properties fetched successfully")
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsInfoDTO> getAccountsInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                accountsInfoDTO
+        );
+    }
+
 
 }
