@@ -12,7 +12,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 @Tag(name="CRUD Rest API for Accounts",description = "Update,Create,Fetch,Delete API's are created for Accounts")
 public class AccountController {
-    private IAccountsService iAccountsService;
+    private final IAccountsService iAccountsService;
 
     public AccountController(IAccountsService iAccountsService){
         this.iAccountsService = iAccountsService;
@@ -33,6 +35,9 @@ public class AccountController {
 
     @Value("${build.version}")
     private String buildVersion;
+
+    @Autowired
+    private Environment environment;
     @Operation(
             summary = "Create Account REST API",
             description = "REST API for creating account"
@@ -111,6 +116,18 @@ public class AccountController {
     @GetMapping("/build-info")
     public ResponseEntity<String> getBuildInfo() {
         return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    @Operation(
+            summary = "Fetch Account REST API",
+            description = "REST API for fetching JAVA version"
+    )
+    @ApiResponse(responseCode = "201",description = "JAVA version fetched successfully")
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                environment.getProperty("JAVA_HOME")
+        );
     }
 
 }
