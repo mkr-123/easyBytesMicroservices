@@ -1,0 +1,13 @@
+
+
+build:
+  version: '1.0'
+
+accounts:
+  message: "Welcome to EazyBank accounts related QA APIs "
+  contactDetails:
+    name: "saroja - QA"
+    email: "saroja@eazybank.com"
+  onCallSupport:
+    - 421
+    - (555) 523-1345

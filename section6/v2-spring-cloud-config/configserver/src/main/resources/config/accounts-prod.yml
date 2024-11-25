@@ -1,0 +1,13 @@
+
+
+build:
+  version: '2.0'
+
+accounts:
+  message: "Welcome to EazyBank accounts related product APIs "
+  contactDetails:
+    name: "sree - Developer"
+    email: "sree@eazybank.com"
+  onCallSupport:
+    - 420
+    - (555) 523-1345
