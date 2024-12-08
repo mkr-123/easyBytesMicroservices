@@ -3,6 +3,7 @@ package com.eazybytes.loans.controller;
 import com.eazybytes.loans.constants.LoansConstants;
 import com.eazybytes.loans.dto.ErrorResponseDto;
 import com.eazybytes.loans.dto.LoansDto;
+import com.eazybytes.loans.dto.LoansInfoDto;
 import com.eazybytes.loans.dto.ResponseDto;
 import com.eazybytes.loans.service.ILoansService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +28,17 @@ import org.springframework.web.bind.annotation.*;
 )
 @RestController
 @RequestMapping(path = "/api",produces = {MediaType.APPLICATION_JSON_VALUE})
-@AllArgsConstructor
+
 @Validated
 public class LoansController {
     private ILoansService iLoansService;
+
+    public LoansController(ILoansService iLoansService){
+        this.iLoansService=iLoansService;
+    }
+
+    @Autowired
+    private LoansInfoDto loansInfoDto;
 
     @Operation(
             summary = "Create Loan REST API",
@@ -157,5 +166,17 @@ public class LoansController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(LoansConstants.STATUS_417, LoansConstants.MESSAGE_417_DELETE));
         }
+    }
+
+    @Operation(
+            summary = "Fetch Account REST API",
+            description = "REST API for fetching properties value using configurationg"
+    )
+    @ApiResponse(responseCode = "201",description = "properties fetched successfully")
+    @GetMapping("/contact-info")
+    public ResponseEntity<LoansInfoDto> getLoansInfo() {
+        return ResponseEntity.status(HttpStatus.OK).body(
+                loansInfoDto
+        );
     }
 }
