@@ -3,14 +3,25 @@ spring:
     name: "configserver"
 
   profiles:
-    active: native
+#    active: native
+     active: git
 
   cloud:
     config:
       server:
-        native:
+#        native:
 #          search-locations: "classpath:/config/"
-           search-locations: "file:///F://easybytes//accounts//easyBytesMicroservices//section6//v2-spring-cloud-config//configserver//src//main//resources//config"
+#           search-locations: "file:///F://easybytes//accounts//easyBytesMicroservices//section6//v2-spring-cloud-config//configserver//src//main//resources//config"
+         git:
+           uri: "https://github.com/mkr-123/eazybytes-config.git"
+           default-label: "main"
+           timeout: 5
+           clone-on-start: true
+           force-pull: true
+           username: "mkr-123"
+           password: "monesh@4712"
 
+encrypt:
+  key: "45D81EC1EF61DF9AD8D3E5BB397F9"
 server:
   port: 8071
