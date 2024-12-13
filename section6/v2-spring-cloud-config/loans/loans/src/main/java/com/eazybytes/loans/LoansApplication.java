@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-/*@ComponentScans({ @ComponentScan("com.eazybytes.loans.controller") })
+/*@ComponentScans({ @ComponentScan("com.e   azybytes.loans.controller") })
 @EnableJpaRepositories("com.eazybytes.loans.repository")
 @EntityScan("com.eazybytes.loans.model")*/
 @EnableConfigurationProperties(LoansInfoDto.class)

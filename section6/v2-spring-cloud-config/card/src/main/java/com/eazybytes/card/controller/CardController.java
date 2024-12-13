@@ -157,7 +157,7 @@ public class CardController {
     @GetMapping("/contact-info")
     public ResponseEntity<CardInfoDto> getCardsInfo() {
         log.info("card Info");
-        log.info(cardInfoDto.message());
+//        log.info(cardInfoDto.message());
         return ResponseEntity.status(HttpStatus.OK).body(
                 cardInfoDto
         );
