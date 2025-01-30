@@ -1,0 +1,24 @@
+services:
+  network-deploy-services:
+    networks:
+      - easybank
+
+  microserivce-base-config:
+    extends:
+      service: network-deploy-services
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+
+
+
+  microserivce-configserver-config:
+    extends:
+      serivce: microserivce-base-config
+    depends_on:
+      configserver:
+        condition: service_healthy
+      environment:
+        SPRING_PROFILES_ACTIVE: default
+        SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
